@@ -87,7 +87,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemNovoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovoAlunoActionPerformed
         //Instancia a tela de cadastro de aluno
-        FrmCadastroAluno objeto = new FrmCadastroAluno();
+        Fmcadastroproduto objeto = new Fmcadastroproduto();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemNovoAlunoActionPerformed
 

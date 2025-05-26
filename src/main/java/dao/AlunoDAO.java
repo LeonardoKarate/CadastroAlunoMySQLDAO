@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import modelo.Aluno;
+import modelo.Produto;
 
 /**
  * Realiza a persistência de dados.
@@ -15,12 +15,12 @@ import modelo.Aluno;
 public class AlunoDAO {
 
     //Utilizado para retornar uma lista de alunos.
-    public ArrayList<Aluno> minhaLista = new ArrayList<>();
+    public ArrayList<Produto> minhaLista = new ArrayList<>();
 
     /**
      * Retorna a Lista de Alunos(objetos)
      */
-    public ArrayList<Aluno> getMinhaLista() {
+    public ArrayList<Produto> getMinhaLista() {
 
         minhaLista.clear(); // Limpa nosso ArrayList
 
@@ -35,7 +35,7 @@ public class AlunoDAO {
                 String curso = res.getString("curso");
                 int fase = res.getInt("fase");
 
-                Aluno objeto = new Aluno(id, nome, idade, curso, fase);
+                Produto objeto = new Produto(id, nome, idade, curso, fase);
 
                 minhaLista.add(objeto);
             }
@@ -47,7 +47,7 @@ public class AlunoDAO {
         return minhaLista;
     }
 
-    public void setMinhaLista(ArrayList<Aluno> minhaLista) {
+    public void setMinhaLista(ArrayList<Produto> minhaLista) {
         this.minhaLista = minhaLista;
     }
 
@@ -107,7 +107,7 @@ public class AlunoDAO {
     /**
      * Cadastra um novo aluno.
      */
-    public boolean insertAlunoBD(Aluno objeto) {
+    public boolean insertAlunoBD(Produto objeto) {
         String sql = "INSERT INTO tb_alunos(id,nome,idade,curso,fase) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -146,7 +146,7 @@ public class AlunoDAO {
     /**
      * Edita um aluno específico pelo seu campo ID
      */
-    public boolean updateAlunoBD(Aluno objeto) {
+    public boolean updateAlunoBD(Produto objeto) {
 
         String sql = "UPDATE tb_alunos set nome = ? ,idade = ? ,curso = ? ,fase = ? WHERE id = ?";
 
@@ -173,8 +173,8 @@ public class AlunoDAO {
     /**
      * Carrega um aluno pelo ID
      */
-    public Aluno carregaAluno(int id) {
-        Aluno objeto = new Aluno();
+    public Produto carregaAluno(int id) {
+        Produto objeto = new Produto();
         objeto.setId(id);
         try {
             Statement stmt = this.getConexao().createStatement();

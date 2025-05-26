@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Classe que representa uma Aluno.
  */
-public class Aluno extends Pessoa {
+public class Produto extends Pessoa {
 
     /**
      * Curso que o aluno realiza.
@@ -24,7 +24,7 @@ public class Aluno extends Pessoa {
     /**
      * Construtor de Objeto Vazio.
      */
-    public Aluno() {
+    public Produto() {
         this(0, "", 0, "", 0);
     }
 
@@ -37,7 +37,7 @@ public class Aluno extends Pessoa {
      * @param curso Curso do aluno.
      * @param fase Fase do aluno.
      */
-    public Aluno(int id, String nome, int idade, String curso, int fase) {
+    public Produto(int id, String nome, int idade, String curso, int fase) {
         super(id, nome, idade);
         this.curso = curso;
         this.fase = fase;
@@ -99,7 +99,7 @@ public class Aluno extends Pessoa {
      *
      * @return Um ArrayList com todos os Alunos.
      */
-    public ArrayList<Aluno> getMinhaLista() {
+    public ArrayList<Produto> getMinhaLista() {
         return dao.getMinhaLista();
     }
 
@@ -114,7 +114,7 @@ public class Aluno extends Pessoa {
      */
     public boolean insertAlunoBD(String nome, int idade, String curso, int fase) {
         int id = this.maiorID() + 1;
-        Aluno objeto = new Aluno(id, nome, idade, curso, fase);
+        Produto objeto = new Produto(id, nome, idade, curso, fase);
         dao.insertAlunoBD(objeto);
         return true;
     }
@@ -141,7 +141,7 @@ public class Aluno extends Pessoa {
      * @return Verdadeiro ou falso se conseguiu fazer a inclusão.
      */
     public boolean updateAlunoBD(int id, String nome, int idade, String curso, int fase) {
-        Aluno objeto = new Aluno(id, nome, idade, curso, fase);
+        Produto objeto = new Produto(id, nome, idade, curso, fase);
         dao.updateAlunoBD(objeto);
         return true;
     }
@@ -152,7 +152,7 @@ public class Aluno extends Pessoa {
      * @param id O id do aluno a ser carregado.
      * @return Um objeto aluno preenchido.
      */
-    public Aluno carregaAluno(int id) {
+    public Produto carregaAluno(int id) {
         return dao.carregaAluno(id);
     }
 

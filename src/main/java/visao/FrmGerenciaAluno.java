@@ -1,6 +1,6 @@
 package visao;
 
-import modelo.Aluno;
+import modelo.Produto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 public class FrmGerenciaAluno extends javax.swing.JFrame {
 
     //cria o vínculo com o objetoaluno
-    private Aluno objetoaluno;
+    private Produto objetoaluno;
 
     public FrmGerenciaAluno() {
         initComponents();
-        this.objetoaluno = new Aluno(); // carrega objetoaluno de aluno
+        this.objetoaluno = new Produto(); // carrega objetoaluno de aluno
         this.carregaTabela();
     }
 
@@ -290,8 +290,8 @@ public class FrmGerenciaAluno extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.JTableAlunos.getModel();
         modelo.setNumRows(0); // Posiciona na primeira linha da tabela
         // Carrega a lista de objetos aluno
-        ArrayList<Aluno> minhaLista = objetoaluno.getMinhaLista();
-        for (Aluno a : minhaLista) {
+        ArrayList<Produto> minhaLista = objetoaluno.getMinhaLista();
+        for (Produto a : minhaLista) {
             modelo.addRow(new Object[]{
                 a.getId(),
                 a.getNome(),

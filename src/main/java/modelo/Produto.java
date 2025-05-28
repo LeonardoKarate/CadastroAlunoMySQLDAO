@@ -1,26 +1,46 @@
 package modelo;
 
-import dao.AlunoDAO;
+import dao.ProdutoDAO;
 import java.util.ArrayList;
 
 /**
  * Classe que representa uma Aluno.
  */
-public class Produto extends Pessoa {
+public class Produto {
 
     /**
-     * Curso que o aluno realiza.
+     * Nome do Produto.
      */
-    private String curso;
+    private String nome;
     /**
-     * Fase que o aluno se encontra.
+     * preço do produto.
      */
-    private int fase;
+    private double preco;
     /**
-     * Objeto dao manipulado pelo aluno.
+     * Unidade de medida do Produto.
      */
-    private AlunoDAO dao;
-
+    private String unidade;
+        /**
+     * quantidade do produto em estoque;
+     */
+    private int quantidade;
+        /**
+     * quantidade minima do produto estipulado para o estoque.
+     */
+    private int quantidadeMinima;
+        /**
+     * quantidade maxima do produto estipulado para o estoque.
+     */
+    private int quantidadeMaxima;
+        /**
+     * Objeto dao manipulado.
+     */
+    private Categoria categoria;
+        /**
+     * Objeto dao manipulado.
+     */
+    private ProdutoDAO dao;
+    
     /**
      * Construtor de Objeto Vazio.
      */
@@ -31,17 +51,23 @@ public class Produto extends Pessoa {
     /**
      * Construtor com parâmetro.
      *
-     * @param id Identificador do aluno.
      * @param nome Nome do aluno.
-     * @param idade Idade do aluno.
-     * @param curso Curso do aluno.
-     * @param fase Fase do aluno.
+     * @param preco preço do produto.
+     * @param unidade unidade de medida do produto.
+     * @param quantidade quantidade de produto em estoque.
+     * @param quantidadeMinima quantidade minima recomendada de produto em estoque.
+     * @param quantidadeMaxima quantidade maxima recomendada de produto em estoque.
+     * @param categoria a categoria do produto.
      */
-    public Produto(int id, String nome, int idade, String curso, int fase) {
-        super(id, nome, idade);
-        this.curso = curso;
-        this.fase = fase;
-        this.dao = new AlunoDAO();
+    public Produto(String nome, double preco, String unidade, int quantidade, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
+        this.nome = nome;
+        this.preco = preco;
+        this.unidade = unidade;
+        this.quantidade = quantidade;
+        this.quantidadeMinima = quantidadeMinima;
+        this.quantidadeMaxima = quantidadeMaxima;
+        this.categoria = categoria;
+        this.dao = new ProdutoDAO();
     }
 
     // Métodos GET e SET
@@ -50,43 +76,12 @@ public class Produto extends Pessoa {
      *
      * @return Uma String com o nome do curso do aluno.
      */
-    public String getCurso() {
-        return curso;
-    }
 
     /**
      * Modifica o curso do aluno.
      *
      * @param curso Uma string com o nome do curso do aluno.
      */
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-
-    /**
-     * Retorna a fase do aluno.
-     *
-     * @return Um inteiro com a fase do aluno.
-     */
-    public int getFase() {
-        return fase;
-    }
-
-    /**
-     * Modifica a fase do aluno.
-     *
-     * @param fase Um int com a fase do aluno.
-     */
-    public void setFase(int fase) {
-        this.fase = fase;
-    }
-
-    /**
-     * Retorna os dados do aluno em uma string.
-     *
-     * @return Uma string com todos os dados do aluno concatenado.
-     */
-    @Override
     public String toString() {
         return super.toString() + "curso=" + curso + ", fase=" + fase;
     }
@@ -163,5 +158,103 @@ public class Produto extends Pessoa {
      */
     public int maiorID() {
         return dao.maiorID();
+    }
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * @return the preco
+     */
+    public double getPreco() {
+        return preco;
+    }
+
+    /**
+     * @param preco the preco to set
+     */
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    /**
+     * @return the unidade
+     */
+    public String getUnidade() {
+        return unidade;
+    }
+
+    /**
+     * @param unidade the unidade to set
+     */
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    /**
+     * @return the quantidadeMinima
+     */
+    public int getQuantidadeMinima() {
+        return quantidadeMinima;
+    }
+
+    /**
+     * @param quantidadeMinima the quantidadeMinima to set
+     */
+    public void setQuantidadeMinima(int quantidadeMinima) {
+        this.quantidadeMinima = quantidadeMinima;
+    }
+
+    /**
+     * @return the quantidadeMaxima
+     */
+    public int getQuantidadeMaxima() {
+        return quantidadeMaxima;
+    }
+
+    /**
+     * @param quantidadeMaxima the quantidadeMaxima to set
+     */
+    public void setQuantidadeMaxima(int quantidadeMaxima) {
+        this.quantidadeMaxima = quantidadeMaxima;
+    }
+
+    /**
+     * @return the categoria
+     */
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

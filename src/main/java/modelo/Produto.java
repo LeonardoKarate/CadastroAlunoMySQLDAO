@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class Produto {
 
     /**
+     * Identificador do Produto.
+     */
+    private int id;
+    /**
      * Nome do Produto.
      */
     private String nome;
@@ -20,46 +24,50 @@ public class Produto {
      * Unidade de medida do Produto.
      */
     private String unidade;
-        /**
+    /**
      * quantidade do produto em estoque;
      */
     private int quantidade;
-        /**
+    /**
      * quantidade minima do produto estipulado para o estoque.
      */
     private int quantidadeMinima;
-        /**
+    /**
      * quantidade maxima do produto estipulado para o estoque.
      */
     private int quantidadeMaxima;
-        /**
+    /**
      * Objeto dao manipulado.
      */
     private Categoria categoria;
-        /**
+    /**
      * Objeto dao manipulado.
      */
     private ProdutoDAO dao;
-    
+
     /**
      * Construtor de Objeto Vazio.
      */
     public Produto() {
-        this(0, "", 0, "", 0);
+        this(0, "", 0.0, "", 0, 0, 0, null);
     }
 
     /**
      * Construtor com parâmetro.
      *
-     * @param nome Nome do aluno.
+     * @param id Identificador do Produto.
+     * @param nome Nome do Produto.
      * @param preco preço do produto.
      * @param unidade unidade de medida do produto.
      * @param quantidade quantidade de produto em estoque.
-     * @param quantidadeMinima quantidade minima recomendada de produto em estoque.
-     * @param quantidadeMaxima quantidade maxima recomendada de produto em estoque.
+     * @param quantidadeMinima quantidade minima recomendada de produto em
+     * estoque.
+     * @param quantidadeMaxima quantidade maxima recomendada de produto em
+     * estoque.
      * @param categoria a categoria do produto.
      */
-    public Produto(String nome, double preco, String unidade, int quantidade, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
+    public Produto(int id, String nome, double preco, String unidade, int quantidade, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
+        this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.unidade = unidade;
@@ -72,16 +80,141 @@ public class Produto {
 
     // Métodos GET e SET
     /**
-     * Retorna o curso do aluno.
-     *
-     * @return Uma String com o nome do curso do aluno.
+     * @return um int com o indentificador do produto.
      */
+    public int getId() {
+        return id;
+    }
 
     /**
-     * Modifica o curso do aluno.
+     * Retorna o nome do produto.
      *
-     * @param curso Uma string com o nome do curso do aluno.
+     * @return Uma String com o nome do produto.
      */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Modifica o nome do produto.
+     *
+     * @param nome Uma string com o nome do produto.
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * Retorna o preço do produto.
+     *
+     * @return um double com o preço do produto.
+     */
+    public double getPreco() {
+        return preco;
+    }
+
+    /**
+     * Modifica o Preço do produto.
+     *
+     * @param preco um double com o preço do produto.
+     */
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    /**
+     * Retorna o tipo de unidade do Produto.
+     *
+     * @return uma String com o tipo da unidade do produto.
+     */
+    public String getUnidade() {
+        return unidade;
+    }
+
+    /**
+     * Modifica a unidade do produto.
+     *
+     * @param unidade uma String com o tipo da unidade do produto.
+     */
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    /**
+     * Retorna a quantidade de produto em estoque.
+     *
+     * @return um int com a quantidade de produtos em estoque.
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * Modifica a quantidade de produto em estoque.
+     *
+     * @param quantidade um int com a quantidade de produtos em estoque.
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    /**
+     * Retorna a quantidade minima recomendada em estoque.
+     *
+     * @return um int com a quantidade Minima em estoque recomendada.
+     */
+    public int getQuantidadeMinima() {
+        return quantidadeMinima;
+    }
+
+    /**
+     * Modifica a quantidade minima recomendada do produto em estoque.
+     *
+     * @param quantidadeMinima uma int com a quantidade minima do produto
+     * recomendada em estoque.
+     */
+    public void setQuantidadeMinima(int quantidadeMinima) {
+        this.quantidadeMinima = quantidadeMinima;
+    }
+
+    /**
+     * Retorna a quantidade maxima do produto em estoque.
+     *
+     * @return um int com a quantidade Maxima do produto em estoque.
+     */
+    public int getQuantidadeMaxima() {
+        return quantidadeMaxima;
+    }
+
+    /**
+     * Modifica a quantidade maxima de produto recomendade em estoque.
+     *
+     * @param quantidadeMaxima uma String com a quantidade Maxima do produto
+     * recomendada em estoque.
+     */
+    public void setQuantidadeMaxima(int quantidadeMaxima) {
+        this.quantidadeMaxima = quantidadeMaxima;
+    }
+
+    /**
+     * Retorna a categoria do produto.
+     *
+     * @return uma Categoria com as especificações da categoria do produto.
+     */
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * Modifica a categoria do produto.
+     *
+     * @param categoria uma Categoria com as especificações da categoria do
+     * produto.
+     */
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public String toString() {
         return super.toString() + "curso=" + curso + ", fase=" + fase;
     }
@@ -92,63 +225,73 @@ public class Produto {
     /**
      * Retorna a Lista de Alunos(objetos).
      *
-     * @return Um ArrayList com todos os Alunos.
+     * @return Um ArrayList com todos os Produtos.
      */
     public ArrayList<Produto> getMinhaLista() {
         return dao.getMinhaLista();
     }
 
     /**
-     * Insere um novo aluno.
+     * Insere um novo produto.
      *
-     * @param nome O nome do aluno.
-     * @param idade A idade do aluno.
-     * @param curso O curso do aluno
-     * @param fase A fase do aluno.
+     * @param nome Nome do produto.
+     * @param preco preço do produto.
+     * @param unidade unidade de medida do produto.
+     * @param quantidade quantidade de produto em estoque.
+     * @param quantidadeMinima quantidade minima recomendada de produto em
+     * estoque.
+     * @param quantidadeMaxima quantidade maxima recomendada de produto em
+     * estoque.
+     * @param categoria a categoria do produto.
      * @return Verdadeiro ou falso se conseguiu fazer a inclusão.
      */
-    public boolean insertAlunoBD(String nome, int idade, String curso, int fase) {
+    public boolean inserProdutoBD(String nome, double preco, String unidade, int quantidade, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
         int id = this.maiorID() + 1;
-        Produto objeto = new Produto(id, nome, idade, curso, fase);
-        dao.insertAlunoBD(objeto);
+        Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
+        dao.insertProdutoBD(objeto);
         return true;
     }
 
     /**
-     * Deleta um aluno especÍfico pelo seu ID.
+     * Deleta um Produto especÍfico pelo seu ID.
      *
-     * @param id Id do aluno a ser excluído.
+     * @param id Id do Produto a ser excluído.
      * @return Verdadeiro ou falso se conseguiu fazer a exclusão.
      */
-    public boolean deleteAlunoBD(int id) {
-        dao.deleteAlunoBD(id);
+    public boolean deleteProdutoBD(int id) {
+        dao.deleteProdutoBD(id);
         return true;
     }
 
     /**
-     * Edita um aluno especÍfico pelo seu ID.
+     * Edita um produto especÍfico pelo seu ID.
      *
-     * @param id O id do aluno.
-     * @param nome O nome do aluno.
-     * @param idade A idade do aluno.
-     * @param curso O curso do aluno
-     * @param fase A fase do aluno.
-     * @return Verdadeiro ou falso se conseguiu fazer a inclusão.
+     * @param id Identificação do Produto.
+     * @param nome Nome do Produto.
+     * @param preco preço do produto.
+     * @param unidade unidade de medida do produto.
+     * @param quantidade quantidade de produto em estoque.
+     * @param quantidadeMinima quantidade minima recomendada de produto em
+     * estoque.
+     * @param quantidadeMaxima quantidade maxima recomendada de produto em
+     * estoque.
+     * @param categoria a categoria do produto.
+     * @return Verdadeiro ou falso se conseguiu fazer a alteração.
      */
-    public boolean updateAlunoBD(int id, String nome, int idade, String curso, int fase) {
-        Produto objeto = new Produto(id, nome, idade, curso, fase);
-        dao.updateAlunoBD(objeto);
+    public boolean updateProdutoBD(int id, String nome, double preco, String unidade, int quantidade, int quantidadeMinima, int quantidadeMaxima, Categoria categoria) {
+        Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
+        dao.updateProdutoBD(objeto);
         return true;
     }
 
     /**
-     * Carrega dados de um aluno especÍfico pelo seu ID.
+     * Carrega dados de um Produto especÍfico pelo seu ID.
      *
-     * @param id O id do aluno a ser carregado.
+     * @param id O id do Produto a ser carregado.
      * @return Um objeto aluno preenchido.
      */
-    public Produto carregaAluno(int id) {
-        return dao.carregaAluno(id);
+    public Produto carregaProduto(int id) {
+        return dao.carregaProduto(id);
     }
 
     /**
@@ -158,103 +301,5 @@ public class Produto {
      */
     public int maiorID() {
         return dao.maiorID();
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the preco
-     */
-    public double getPreco() {
-        return preco;
-    }
-
-    /**
-     * @param preco the preco to set
-     */
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    /**
-     * @return the unidade
-     */
-    public String getUnidade() {
-        return unidade;
-    }
-
-    /**
-     * @param unidade the unidade to set
-     */
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
-    }
-
-    /**
-     * @return the quantidade
-     */
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    /**
-     * @param quantidade the quantidade to set
-     */
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    /**
-     * @return the quantidadeMinima
-     */
-    public int getQuantidadeMinima() {
-        return quantidadeMinima;
-    }
-
-    /**
-     * @param quantidadeMinima the quantidadeMinima to set
-     */
-    public void setQuantidadeMinima(int quantidadeMinima) {
-        this.quantidadeMinima = quantidadeMinima;
-    }
-
-    /**
-     * @return the quantidadeMaxima
-     */
-    public int getQuantidadeMaxima() {
-        return quantidadeMaxima;
-    }
-
-    /**
-     * @param quantidadeMaxima the quantidadeMaxima to set
-     */
-    public void setQuantidadeMaxima(int quantidadeMaxima) {
-        this.quantidadeMaxima = quantidadeMaxima;
-    }
-
-    /**
-     * @return the categoria
-     */
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    /**
-     * @param categoria the categoria to set
-     */
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 }

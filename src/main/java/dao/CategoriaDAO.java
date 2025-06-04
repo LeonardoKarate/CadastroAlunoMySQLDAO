@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Categoria;
+import modelo.CategoriaComContagem;
 
 /**
  * Realiza a persistência de dados.
@@ -16,6 +17,7 @@ public class CategoriaDAO {
 
     //Utilizado para retornar uma lista de Categorias.
     public ArrayList<Categoria> minhaLista = new ArrayList<>();
+    public ArrayList<CategoriaComContagem> listaComContagem = new ArrayList<>();
 
     /**
      * Retorna a Lista de Categorias(objetos)
@@ -82,7 +84,7 @@ public class CategoriaDAO {
             String database = "db_Produtos";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "root";
+            String password = "Ln5n2skk3r1!";
 
             connection = DriverManager.getConnection(url, user, password);
             // Testando..
@@ -169,7 +171,7 @@ public class CategoriaDAO {
      * Carrega uma categoria pelo ID
      */
     public Categoria carregaCategoria(int id) {
-        
+
         String nome = "";
         String tamanho = "";
         String embalagem = "";
@@ -190,5 +192,28 @@ public class CategoriaDAO {
         Categoria objeto = new Categoria(id, nome, tamanho, embalagem);
 
         return objeto;
+    }
+
+    public ArrayList<CategoriaComContagem> getCategoriaDistinta() {
+
+        minhaLista.clear(); // Limpa nosso ArrayList
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT nome,(SELECT COUNT(*) FROM tb_produtos WHERE tb_produtos.id_categoria = tb_categorias.id) AS total FROM tb_categorias;");
+            while (res.next()) {
+
+                String nome = res.getString("nome");
+                int total = res.getInt("total");
+
+                CategoriaComContagem objeto = new CategoriaComContagem(nome, total);
+                listaComContagem.add(objeto);
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return listaComContagem;
     }
 }

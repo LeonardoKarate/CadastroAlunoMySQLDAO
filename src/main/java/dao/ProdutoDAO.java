@@ -14,7 +14,7 @@ import modelo.Produto;
  * Realiza a persistência de dados.
  */
 public class ProdutoDAO {
-
+    private CategoriaDAO categoriaDao = new CategoriaDAO();
     //Utilizado para retornar uma lista de Produtos.
     public ArrayList<Produto> minhaLista = new ArrayList<>();
 
@@ -35,9 +35,11 @@ public class ProdutoDAO {
                 double preco = res.getDouble("preco");
                 String unidade = res.getString("unidade");
                 int quantidade = res.getInt("quantidade");
-                int quantidadeMinima = res.getInt("quantidadeMinima");
-                int quantidadeMaxima = res.getInt("quantidadeMaxima");
-                Categoria categoria = res.getInt("categoria");
+                int quantidadeMinima = res.getInt("quantidade_minima");
+                int quantidadeMaxima = res.getInt("quantidade_maxima");
+                int idCategoria = res.getInt("id_categoria");
+                
+                Categoria categoria = categoriaDao.carregaCategoria(idCategoria);
 
                 Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
                 minhaLista.add(objeto);
@@ -84,10 +86,10 @@ public class ProdutoDAO {
 
             // Configurar a conexão
             String server = "localhost"; //caminho do MySQL
-            String database = "db_alunos";
+            String database = "db_produtos";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "root";
+            String password = "Ln5n2skk3r1!";
 
             connection = DriverManager.getConnection(url, user, password);
             // Testando..
@@ -122,7 +124,7 @@ public class ProdutoDAO {
             stmt.setInt(5, objeto.getQuantidade());
             stmt.setInt(6, objeto.getQuantidadeMinima());
             stmt.setInt(7, objeto.getQuantidadeMaxima());
-            stmt.setInt(8, objeto.getCategoria());
+//            stmt.setInt(8, objeto.getCategoria());
 
             stmt.execute();
             stmt.close();
@@ -168,7 +170,7 @@ public class ProdutoDAO {
             stmt.setInt(7, objeto.getQuantidadeMaxima());
             
             
-            stmt.setInt(8, objeto.getCategoria());
+//            stmt.setInt(8, objeto.getCategoria());
 
             stmt.execute();
             stmt.close();

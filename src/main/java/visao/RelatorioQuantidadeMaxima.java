@@ -15,10 +15,11 @@ import modelo.Produto;
  *
  * @author leonardoNunes
  */
-public class RelatorioQuantidadeMinima extends javax.swing.JFrame {
-    
+public class RelatorioQuantidadeMaxima extends javax.swing.JFrame {
+
     private ProdutoDAO produtoDAO;
-      public RelatorioQuantidadeMinima() {
+
+    public RelatorioQuantidadeMaxima() {
         initComponents();
         try {
             produtoDAO = new ProdutoDAO();
@@ -35,7 +36,7 @@ public class RelatorioQuantidadeMinima extends javax.swing.JFrame {
         List<Produto> produtos = new ArrayList<>();
         if (produtoDAO != null) {
             try {
-                produtos = produtoDAO.getRelatorioQuantidadeMinima(); // usa método real
+                produtos = produtoDAO.getRelatorioQuantidadeMaxima(); // usa método real
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
             }
@@ -45,8 +46,7 @@ public class RelatorioQuantidadeMinima extends javax.swing.JFrame {
                 p.getId(),
                 p.getNome(),
                 p.getQuantidade(),
-                p.getQuantidadeMinima(),
-            });
+                p.getQuantidadeMaxima(),});
         }
     }
 
@@ -72,7 +72,7 @@ public class RelatorioQuantidadeMinima extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "NOME", "QUANTIDADE", "QUANTIDADE MINIMA"
+                "ID", "NOME", "QUANTIDADE", "QUANTIDADE Maxima"
             }
         ));
         jScrollPane1.setViewportView(tabelaProdutos);
@@ -114,20 +114,20 @@ public class RelatorioQuantidadeMinima extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioQuantidadeMinima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioQuantidadeMaxima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioQuantidadeMinima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioQuantidadeMaxima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioQuantidadeMinima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioQuantidadeMaxima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioQuantidadeMinima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioQuantidadeMaxima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioQuantidadeMinima().setVisible(true);
+                new RelatorioQuantidadeMaxima().setVisible(true);
             }
         });
     }

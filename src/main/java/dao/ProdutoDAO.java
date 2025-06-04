@@ -220,4 +220,29 @@ public class ProdutoDAO {
         Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
         return objeto;
     }
+    
+    public ArrayList<Produto> getRelatorioQuantidadeMinima() {
+
+        minhaLista.clear(); // Limpa nosso ArrayList
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT id, nome, quantidade, quantidade_minima from tb_produtos WHERE quantidade < quantidade_minima");
+            while (res.next()) {
+
+                int id = res.getInt("id");
+                String nome = res.getString("nome");
+                int quantidade = res.getInt("quantidade");
+                int quantidadeMinima = res.getInt("quantidade_minima");                
+
+                Produto objeto = new Produto(id, nome, 0.0, "", quantidade, quantidadeMinima, 0, null);
+                minhaLista.add(objeto);
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return minhaLista;
+    }
 }

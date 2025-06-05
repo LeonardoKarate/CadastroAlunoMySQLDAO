@@ -27,12 +27,31 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArquivo = new javax.swing.JMenu();
         jMenuItemNovoAluno = new javax.swing.JMenuItem();
         jMenuItemGerenciarAlunos = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
+        jRelatorio = new javax.swing.JMenu();
+        jMenuItemQuantidadeMinima = new javax.swing.JMenuItem();
+        jMenuItemQuantidadeMaxima = new javax.swing.JMenuItem();
+        jMenuItemCategoriasDistintas = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar2.add(jMenu2);
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu principal");
@@ -68,6 +87,34 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuSobre.setText("Sobre");
         jMenuBar1.add(jMenuSobre);
 
+        jRelatorio.setText("Relatório");
+
+        jMenuItemQuantidadeMinima.setText("QuantidadeMinima");
+        jMenuItemQuantidadeMinima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemQuantidadeMinimaActionPerformed(evt);
+            }
+        });
+        jRelatorio.add(jMenuItemQuantidadeMinima);
+
+        jMenuItemQuantidadeMaxima.setText("QuantidadeMaxima");
+        jMenuItemQuantidadeMaxima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemQuantidadeMaximaActionPerformed(evt);
+            }
+        });
+        jRelatorio.add(jMenuItemQuantidadeMaxima);
+
+        jMenuItemCategoriasDistintas.setText("CategoriasDistintas");
+        jMenuItemCategoriasDistintas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCategoriasDistintasActionPerformed(evt);
+            }
+        });
+        jRelatorio.add(jMenuItemCategoriasDistintas);
+
+        jMenuBar1.add(jRelatorio);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -98,9 +145,27 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemGerenciarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerenciarAlunosActionPerformed
         //Instancia a tela de gerenciar de aluno
-        FrmGerenciaAluno objeto = new FrmGerenciaAluno();
+        FrmGerenciaProduto objeto = new FrmGerenciaProduto();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemGerenciarAlunosActionPerformed
+
+    private void jMenuItemQuantidadeMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuantidadeMinimaActionPerformed
+
+        RelatorioQuantidadeMinima objeto =  new RelatorioQuantidadeMinima();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemQuantidadeMinimaActionPerformed
+
+    private void jMenuItemQuantidadeMaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuantidadeMaximaActionPerformed
+
+        RelatorioQuantidadeMaxima objeto = new RelatorioQuantidadeMaxima();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemQuantidadeMaximaActionPerformed
+
+    private void jMenuItemCategoriasDistintasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCategoriasDistintasActionPerformed
+
+        RelatorioCategoriaDistinta objeto = new RelatorioCategoriaDistinta();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCategoriasDistintasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,11 +206,20 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCategoriasDistintas;
     private javax.swing.JMenuItem jMenuItemGerenciarAlunos;
     private javax.swing.JMenuItem jMenuItemNovoAluno;
+    private javax.swing.JMenuItem jMenuItemQuantidadeMaxima;
+    private javax.swing.JMenuItem jMenuItemQuantidadeMinima;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenu jMenuSobre;
+    private javax.swing.JMenu jRelatorio;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,6 +36,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuArquivo = new javax.swing.JMenu();
         jMenuItemNovoAluno = new javax.swing.JMenuItem();
         jMenuItemGerenciarAlunos = new javax.swing.JMenuItem();
+        jMenuItemNovaCategoria = new javax.swing.JMenuItem();
+        jMenuItemGerenciarCategorias = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
         jRelatorio = new javax.swing.JMenu();
@@ -58,7 +60,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuArquivo.setText("Arquivo");
 
-        jMenuItemNovoAluno.setText("Novo Aluno");
+        jMenuItemNovoAluno.setText("Novo Produto");
         jMenuItemNovoAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemNovoAlunoActionPerformed(evt);
@@ -66,13 +68,29 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuArquivo.add(jMenuItemNovoAluno);
 
-        jMenuItemGerenciarAlunos.setText("Gerenciar Alunos");
+        jMenuItemGerenciarAlunos.setText("Gerenciar Produtos");
         jMenuItemGerenciarAlunos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemGerenciarAlunosActionPerformed(evt);
             }
         });
         jMenuArquivo.add(jMenuItemGerenciarAlunos);
+
+        jMenuItemNovaCategoria.setText("nova Categoria");
+        jMenuItemNovaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNovaCategoriaActionPerformed(evt);
+            }
+        });
+        jMenuArquivo.add(jMenuItemNovaCategoria);
+
+        jMenuItemGerenciarCategorias.setText("Gerenciar Categorias");
+        jMenuItemGerenciarCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGerenciarCategoriasActionPerformed(evt);
+            }
+        });
+        jMenuArquivo.add(jMenuItemGerenciarCategorias);
 
         jMenuItemSair.setText("Sair");
         jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +185,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItemCategoriasDistintasActionPerformed
 
+    private void jMenuItemNovaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovaCategoriaActionPerformed
+
+        Teladecriaçãodecategoria objeto = new Teladecriaçãodecategoria();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemNovaCategoriaActionPerformed
+
+    private void jMenuItemGerenciarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerenciarCategoriasActionPerformed
+
+        TelaGerenciaCategoria objeto = new TelaGerenciaCategoria();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemGerenciarCategoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +245,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCategoriasDistintas;
     private javax.swing.JMenuItem jMenuItemGerenciarAlunos;
+    private javax.swing.JMenuItem jMenuItemGerenciarCategorias;
+    private javax.swing.JMenuItem jMenuItemNovaCategoria;
     private javax.swing.JMenuItem jMenuItemNovoAluno;
     private javax.swing.JMenuItem jMenuItemQuantidadeMaxima;
     private javax.swing.JMenuItem jMenuItemQuantidadeMinima;

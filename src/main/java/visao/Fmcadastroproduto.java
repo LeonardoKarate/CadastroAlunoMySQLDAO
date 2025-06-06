@@ -15,6 +15,7 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     public Fmcadastroproduto() {
         initComponents();
         this.objetoProduto = new Produto(); // carrega objeto vazio de Produto
+        String resultado;
 
         List<Categoria> categorias = new ArrayList<>();
 
@@ -22,7 +23,8 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
         categorias = categoriaDAO.getMinhaLista();
 
         for (Categoria c : categorias) {
-            jComboBoxCategoria.addItem(c);
+            resultado = Integer.toString(c.getId()) + ", " + c.getNome();
+            jComboBoxCategoria.addItem(resultado);
         }
     }
 
@@ -114,13 +116,6 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
 
         jLabel8.setText("Categoria:");
 
-        jComboBoxCategoria.setModel(Categoria);
-        jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCategoriaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +145,7 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
                                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                                     .addGap(191, 191, 191)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -212,7 +207,9 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
         int quantidade = 0;
         int quantidadeMinima = 0;
         int quantidadeMaxima = 0;
+        int categoriaId = 0;
         Categoria categoria;
+        String selecionada;
         categoriaDAO = new CategoriaDAO();
 
         nome = this.JTFNome.getText();
@@ -221,15 +218,14 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
         quantidade = Integer.parseInt(this.JTFIdade.getText());
         quantidadeMinima = Integer.parseInt(this.JTFIdade.getText());
         quantidadeMaxima = Integer.parseInt(this.JTFIdade.getText());
+        selecionada = (String)this.jComboBoxCategoria.getSelectedItem();
+        categoriaId = Integer.parseInt(selecionada.split(",")[0]);
+        
+        categoria = categoriaDAO.carregaCategoria(categoriaId);
 
-        // envia os dados para o Controlador cadastrar
-//            this.objetoaluno.insertAlunoBD(nome, idade, curso, fase);
-        JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!");
-        // limpa campos da interface
-        this.JTFNome.setText("");
-        this.JTFIdade.setText("");
-        this.JTFCurso.setText("");
-        this.JTFFase.setText("");
+//         envia os dados para o Controlador cadastrar
+            this.objetoProduto.inserProdutoBD(nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
+        JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
@@ -241,10 +237,6 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,7 +287,7 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     private javax.swing.JTextField JTFFase;
     private javax.swing.JTextField JTFIdade;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JComboBox<Categoria> jComboBoxCategoria;
+    private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

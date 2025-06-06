@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS tb_categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tamanho VARCHAR(50),
-    categoria VARCHAR(100)
+    embalagem VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS tb_produtos (
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS tb_produtos (
     FOREIGN KEY (id_categoria) REFERENCES tb_categorias(id)
 );
 
-INSERT INTO tb_categorias (nome, tamanho, categoria) VALUES 
+INSERT INTO tb_categorias (nome, tamanho, embalagem) VALUES 
 ('Bebidas', 'pequeno', 'Alimentos'),
 ('Laticínios', 'pequeno', 'Alimentos'),
 ('Limpeza', 'medio', 'Higiene'),

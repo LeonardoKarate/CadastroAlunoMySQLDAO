@@ -47,6 +47,12 @@ public class Categoria {
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
+    
+        public Categoria(String nome, String tamanho, String embalagem) {
+        this.nome = nome;
+        this.tamanho = tamanho;
+        this.embalagem = embalagem;
+    }
 
     // Métodos GET e SET
     /** 
@@ -111,4 +117,8 @@ public class Categoria {
     public void setEmbalagem(String embalagem) {
         this.embalagem = embalagem;
     }
+    
+    public String toString() {
+    return nome; // ou qualquer campo que você quer mostrar no combo
+}
 }

@@ -36,7 +36,7 @@ public class RelatorioQuantidadeMaxima extends javax.swing.JFrame {
         List<Produto> produtos = new ArrayList<>();
         if (produtoDAO != null) {
             try {
-                produtos = produtoDAO.getRelatorioQuantidadeMaxima(); // usa método real
+                produtos = produtoDAO.getRelatorioQuantidadeMinima(); // usa método real
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
             }

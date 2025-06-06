@@ -215,9 +215,9 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public String toString() {
-        return super.toString() + "curso=" + curso + ", fase=" + fase;
-    }
+//    public String toString() {
+//        return super.toString() + "curso=" + curso + ", fase=" + fase;
+//    }
 
     /*  ABAIXO OS MÉTODOS PARA USO JUNTO COM O DAO
         SIMULANDO A ESTRUTURA EM CAMADAS PARA USAR COM BANCOS DE DADOS.

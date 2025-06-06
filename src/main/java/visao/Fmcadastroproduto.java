@@ -1,15 +1,29 @@
 package visao;
 
+import dao.CategoriaDAO;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.Produto;
 import javax.swing.JOptionPane;
+import modelo.Categoria;
 
 public class Fmcadastroproduto extends javax.swing.JFrame {
 
-    private Produto objetoaluno; // cria o vínculo com o Aluno
+    private Produto objetoProduto; // cria o vínculo com o produto
+    private CategoriaDAO categoriaDAO;
 
     public Fmcadastroproduto() {
         initComponents();
-        this.objetoaluno = new Produto(); // carrega objeto vazio de aluno
+        this.objetoProduto = new Produto(); // carrega objeto vazio de Produto
+
+        List<Categoria> categorias = new ArrayList<>();
+
+        categoriaDAO = new CategoriaDAO();
+        categorias = categoriaDAO.getMinhaLista();
+
+        for (Categoria c : categorias) {
+            jComboBoxCategoria.addItem(c);
+        }
     }
 
     /**
@@ -38,7 +52,7 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jComboBoxCategoria = new javax.swing.JComboBox<>();
 
         jLabel5.setText("jLabel5");
 
@@ -100,6 +114,13 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
 
         jLabel8.setText("Categoria:");
 
+        jComboBoxCategoria.setModel(Categoria);
+        jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +130,6 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(JTFNome)
                                 .addGroup(layout.createSequentialGroup()
@@ -129,18 +149,18 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
                                                 .addComponent(JTFFase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                                     .addGap(191, 191, 191)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,26 +182,22 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(JTFFase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,54 +205,31 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
-        try {
-            // recebendo e validando dados da interface gráfica.
-            String nome = "";
-            int idade = 0;
-            String curso = "";
-            int fase = 0;
+        // recebendo e validando dados da interface gráfica.
+        String nome = "";
+        double preco = 0.0;
+        String unidade = "";
+        int quantidade = 0;
+        int quantidadeMinima = 0;
+        int quantidadeMaxima = 0;
+        Categoria categoria;
+        categoriaDAO = new CategoriaDAO();
 
-            if (this.JTFNome.getText().length() < 2) {
-                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");
-            } else {
-                nome = this.JTFNome.getText();
-            }
+        nome = this.JTFNome.getText();
+        preco = Integer.parseInt(this.JTFIdade.getText());
+        unidade = this.JTFCurso.getText();
+        quantidade = Integer.parseInt(this.JTFIdade.getText());
+        quantidadeMinima = Integer.parseInt(this.JTFIdade.getText());
+        quantidadeMaxima = Integer.parseInt(this.JTFIdade.getText());
 
-            if (this.JTFIdade.getText().length() <= 0) {
-                throw new Mensagem("Idade deve ser número e maior que zero.");
-            } else {
-                idade = Integer.parseInt(this.JTFIdade.getText());
-            }
-
-            if (this.JTFCurso.getText().length() < 2) {
-                throw new Mensagem("Curso deve conter ao menos 2 caracteres.");
-            } else {
-                curso = this.JTFCurso.getText();
-            }
-
-            if (this.JTFFase.getText().length() <= 0) {
-                throw new Mensagem("Fase deve ser número e maior que zero.");
-            } else {
-                fase = Integer.parseInt(this.JTFFase.getText());
-            }
-
-            // envia os dados para o Controlador cadastrar
-            if (this.objetoaluno.insertAlunoBD(nome, idade, curso, fase)) {
-                JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!");
-                // limpa campos da interface
-                this.JTFNome.setText("");
-                this.JTFIdade.setText("");
-                this.JTFCurso.setText("");
-                this.JTFFase.setText("");
-            }
-            //Exibie no console o aluno cadastrado
-            System.out.println(this.objetoaluno.getMinhaLista().toString());
-
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } catch (NumberFormatException erro2) {
-            JOptionPane.showMessageDialog(null, "Informe um número válido.");
-        }
+        // envia os dados para o Controlador cadastrar
+//            this.objetoaluno.insertAlunoBD(nome, idade, curso, fase);
+        JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!");
+        // limpa campos da interface
+        this.JTFNome.setText("");
+        this.JTFIdade.setText("");
+        this.JTFCurso.setText("");
+        this.JTFFase.setText("");
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
@@ -248,6 +241,10 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +295,7 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     private javax.swing.JTextField JTFFase;
     private javax.swing.JTextField JTFIdade;
     private javax.swing.JTextField JTFNome;
+    private javax.swing.JComboBox<Categoria> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -309,6 +307,5 @@ public class Fmcadastroproduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

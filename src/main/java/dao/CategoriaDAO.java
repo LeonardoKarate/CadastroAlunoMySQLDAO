@@ -108,14 +108,13 @@ public class CategoriaDAO {
      * Cadastra uma nova categoria.
      */
     public boolean insertCategoriaBD(Categoria objeto) {
-        String sql = "INSERT INTO tb_categorias(id,nome,tamanho,embalagem) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_categorias(nome,tamanho,embalagem) VALUES(?,?,?)";
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
-            stmt.setInt(1, objeto.getId());
-            stmt.setString(2, objeto.getNome());
-            stmt.setString(3, objeto.getTamanho());
-            stmt.setString(4, objeto.getEmbalagem());
+            stmt.setString(1, objeto.getNome());
+            stmt.setString(2, objeto.getTamanho());
+            stmt.setString(3, objeto.getEmbalagem());
 
             stmt.execute();
             stmt.close();
@@ -147,7 +146,7 @@ public class CategoriaDAO {
      */
     public boolean updateCategoriaBD(Categoria objeto) {
 
-        String sql = "UPDATE tb_categoria set nome = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
+        String sql = "UPDATE tb_categorias set nome = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -155,6 +154,7 @@ public class CategoriaDAO {
             stmt.setString(1, objeto.getNome());
             stmt.setString(2, objeto.getTamanho());
             stmt.setString(3, objeto.getEmbalagem());
+            stmt.setInt(4, objeto.getId());
 
             stmt.execute();
             stmt.close();

@@ -14,6 +14,7 @@ import modelo.Produto;
  * Realiza a persistência de dados.
  */
 public class ProdutoDAO {
+
     private CategoriaDAO categoriaDao = new CategoriaDAO();
     //Utilizado para retornar uma lista de Produtos.
     public ArrayList<Produto> minhaLista = new ArrayList<>();
@@ -38,7 +39,7 @@ public class ProdutoDAO {
                 int quantidadeMinima = res.getInt("quantidade_minima");
                 int quantidadeMaxima = res.getInt("quantidade_maxima");
                 int idCategoria = res.getInt("id_categoria");
-                
+
                 Categoria categoria = categoriaDao.carregaCategoria(idCategoria);
 
                 Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
@@ -113,7 +114,7 @@ public class ProdutoDAO {
      * Cadastra um novo produto.
      */
     public boolean insertProdutoBD(Produto objeto) {
-        String sql = "INSERT INTO tb_produtos(id,nome,preco,unidade,quantidade,quantidade_minima,quantidade_maxima,categoria) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO tb_produtos(id,nome,preco,unidade,quantidade,quantidade_minima,quantidade_maxima,id_categoria) VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
@@ -124,7 +125,7 @@ public class ProdutoDAO {
             stmt.setInt(5, objeto.getQuantidade());
             stmt.setInt(6, objeto.getQuantidadeMinima());
             stmt.setInt(7, objeto.getQuantidadeMaxima());
-//            stmt.setInt(8, objeto.getCategoria());
+            stmt.setInt(8, objeto.getCategoria().getId());
 
             stmt.execute();
             stmt.close();
@@ -161,16 +162,16 @@ public class ProdutoDAO {
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
-            stmt.setString(2, objeto.getNome());
-            stmt.setDouble(3, objeto.getPreco());
-            
-            stmt.setString(4, objeto.getUnidade());
-            stmt.setInt(5, objeto.getQuantidade());
-            stmt.setInt(6, objeto.getQuantidadeMinima());
-            stmt.setInt(7, objeto.getQuantidadeMaxima());
-            
-            
-//            stmt.setInt(8, objeto.getCategoria());
+            stmt.setString(1, objeto.getNome());
+            stmt.setDouble(2, objeto.getPreco());
+
+            stmt.setString(3, objeto.getUnidade());
+            stmt.setInt(4, objeto.getQuantidade());
+            stmt.setInt(5, objeto.getQuantidadeMinima());
+            stmt.setInt(6, objeto.getQuantidadeMaxima());
+
+            stmt.setInt(7, objeto.getCategoria().getId());
+            stmt.setInt(8, objeto.getId());
 
             stmt.execute();
             stmt.close();
@@ -195,7 +196,7 @@ public class ProdutoDAO {
         int quantidadeMinima = 0;
         int quantidadeMaxima = 0;
         int categoriaId = 0;
-        
+
         try {
             Statement stmt = this.getConexao().createStatement();
 
@@ -207,7 +208,7 @@ public class ProdutoDAO {
             unidade = res.getString("unidade");
             quantidade = res.getInt("quantidade");
             quantidadeMinima = res.getInt("quantidade_minima");
-            quantidadeMaxima  = res.getInt("quantidade_maxima");
+            quantidadeMaxima = res.getInt("quantidade_maxima");
             categoriaId = res.getInt("id_categoria");
 
             stmt.close();
@@ -220,7 +221,7 @@ public class ProdutoDAO {
         Produto objeto = new Produto(id, nome, preco, unidade, quantidade, quantidadeMinima, quantidadeMaxima, categoria);
         return objeto;
     }
-    
+
     public ArrayList<Produto> getRelatorioQuantidadeMinima() {
 
         minhaLista.clear(); // Limpa nosso ArrayList
@@ -233,7 +234,7 @@ public class ProdutoDAO {
                 int id = res.getInt("id");
                 String nome = res.getString("nome");
                 int quantidade = res.getInt("quantidade");
-                int quantidadeMinima = res.getInt("quantidade_minima");                
+                int quantidadeMinima = res.getInt("quantidade_minima");
 
                 Produto objeto = new Produto(id, nome, 0.0, "", quantidade, quantidadeMinima, 0, null);
                 minhaLista.add(objeto);
@@ -244,5 +245,47 @@ public class ProdutoDAO {
             System.out.println("Erro:" + ex);
         }
         return minhaLista;
+    }
+
+    public boolean adicionaEstoque(int id, int quantidade) {
+
+        String sql = "UPDATE tb_produtos set quantidade = quantidade + ? WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, id);
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+            throw new RuntimeException(erro);
+        }
+    }
+    
+        public boolean diminuiEstoque(int id, int quantidade) {
+
+        String sql = "UPDATE tb_produtos set quantidade = quantidade - ? WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, id);
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+            throw new RuntimeException(erro);
+        }
     }
 }
